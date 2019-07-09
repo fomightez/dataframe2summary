@@ -21,7 +21,7 @@ Typical input and results (**the red annoation is just for illustration**):
 The **second* notebook shows how to make a summary data table much like the first notebook produces; however, this script is specialized for binary data for the subgroups, i.e., they can only have two resulting states at most.  
 Typical input and results (**the red annoation is just for illustration**):
 
-![datat_table_binary](text_to_binary_first_example.png)  
+![datat_table_binary](imgs/text_to_binary_first_example.png)  
 
 
 -----
