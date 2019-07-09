@@ -14,14 +14,16 @@ If you have data as a table from elsewhere you can convert it/export into tabula
 
 The intent is that there be (at least) **two** notebooks:  
 The **first** notebook that opens in the active session demonstrates a script that makes it easy to convert a dataframe with groups and subgroups/states into a summary. like the following from a dataframe.  
-Typical input and results (**the red annoation is just for illustration**):
+Examples of typical input and results (**the red annoation is just for illustration**):
 
 ![typical1](imgs/???png)  
 
-The **second* notebook shows how to make a summary data table much like the first notebook produces; however, this script is specialized for binary data for the subgroups, i.e., they can only have two resulting states at most.  
-Typical input and results (**the red annoation is just for illustration**):
+The **second** notebook shows how to make a summary data table much like the first notebook produces; however, this script is specialized for binary data for the subgroups, i.e., they can only have two resulting states at most.  
+Examples of typical input and results (**the red annoation is just for illustration**):
 
-![datat_table_binary](imgs/text_to_binary_first_example.png)  
+![data_table_binary](imgs/text_to_binary_first_example.png)  
+
+![df_binary_summaries](imgs/df_based_binary_to_summaries.png)  
 
 
 -----
