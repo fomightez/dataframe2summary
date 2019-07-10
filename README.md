@@ -18,6 +18,8 @@ Examples of typical input and results (**the red annoation is just for illustrat
 
 ![typical1](imgs/text_subgrp_example.png)  
 
+![typical1](imgs/df_subgrp_example.png)  
+
 The **second** notebook shows how to make a summary data table much like the first notebook produces; however, this script is specialized for binary data for the subgroups, i.e., they can only have two resulting states at most.  
 Examples of typical input and results (**the red annoation is just for illustration**):
 
