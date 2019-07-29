@@ -1,6 +1,6 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fomightez/dataframe2summary/master?filepath=index.ipynb)
 # dataframe2summary
-Repo for demonstrating scripts that convert dataframes / data tables into summarized dataframes / data tables.
+Repo for demonstrating scripts that convert dataframes / data tables into summarized dataframes / data tables. (Currently, the scripts demonstrated are located in [this repo](https://github.com/fomightez/text_mining).)
 
 Click on `launch binder` badge above to spin up a sesion where you can step through the demos.
 
