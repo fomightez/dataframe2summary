@@ -1,4 +1,20 @@
-# This handles the case where only three transcripts per set, see `wide_dataframe_rows2concise_summaries4SalmonResults_in_Excel_using_openpyxlFOR_WITH_STABLE.py` for with seven, 3 typical plus four 'stable'
+# This handles the case where with seven transcripts, 3 typical plus four 'stable', per set, see `wide_dataframe_rows2concise_summaries4SalmonResults_in_Excel_using_openpyxl.py` for case with just three transcripts per set
+#####*****------------------------------------------------------------*****#####
+# This is meant to use with `uv` to run. 
+# First install `uv` with `pip install uv` then run `!uv run {script_url} {pickle_file_name} {output_name_prefix}` where defined those variables prior
+#-------------------------------------------------------------#
+# Pickled dataframe saved as `'raw_complexes_pickled_df.pkl'`.
+#-------------------------------------------------------------#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#   "numpy",
+#   "pandas",
+#   "openpyxl",
+# ]
+# ///
+
+# This handles the case where seven transcripts per set
 #####*****------------------------------------------------------------*****#####
 # This is meant to use with `uv` to run. 
 # First install `uv` with `pip install uv` then run `!uv run {script_url} {pickle_file_name} {output_name_prefix}` where defined those variables prior
@@ -61,7 +77,7 @@ def create_summary_block(ws, data, start_row, start_col):
         cell.fill = transcript_header_fill
         cell.alignment = center_align
     
-    # Transcript details (rows 4+ of block)
+    # Transcript details (rows 4+ of block) - now handles variable number of transcripts
     for j, transcript_info in enumerate(data['transcript_data']):
         detail_row = start_row + 3 + j
         # Transcript name
@@ -71,6 +87,12 @@ def create_summary_block(ws, data, start_row, start_col):
         # NumReads value
         ws.cell(row=detail_row, column=start_col + 2).value = transcript_info['NumReads'] # if prefer not to have 'NumReads' included comment this 
         # out; plus, need to adjust header list above
+
+def calculate_block_height(num_transcripts):
+    """
+    Calculate the height of a block based on number of transcripts
+    """
+    return 2 + 1 + num_transcripts + 1  # 2 summary rows + 1 header row + transcript rows + 1 spacing row
 
 def process_dataframe_to_blocks(df):
     """
@@ -104,14 +126,14 @@ def process_dataframe_to_blocks(df):
     
     return blocks
 
-def create_excel_summary_from_df(df, filename="summary_layout_from_df.xlsx", blocks_per_sheet=48, cols_per_row=3):
+def create_excel_summary_from_df(df, filename="summary_layout_from_df.xlsx", blocks_per_sheet=24, cols_per_row=3):
     """
     Create Excel file with summary blocks from tidy dataframe
     
     Parameters:
     - df: Input dataframe
     - filename: Output Excel filename
-    - blocks_per_sheet: Maximum blocks per sheet (default 48 = 16 rows x 3 cols)
+    - blocks_per_sheet: Maximum blocks per sheet (reduced from 48 to 24 for 7 transcripts)
     - cols_per_row: Number of columns per row (default 3)
     """
     # Convert dataframe to block format
@@ -122,7 +144,12 @@ def create_excel_summary_from_df(df, filename="summary_layout_from_df.xlsx", blo
     
     # Configuration
     block_width = 4  # columns per block (3 data + 1 spacing)
-    block_height = 7  # rows per block (2 summary + 1 header + 3 details + 1 spacing)
+    # Calculate block height dynamically based on actual transcript count
+    if data_list:
+        num_transcripts = len(data_list[0]['transcript_data'])
+        block_height = calculate_block_height(num_transcripts)
+    else:
+        block_height = 11  # default for 7 transcripts (2 + 1 + 7 + 1)
     
     # Calculate number of sheets needed
     num_sheets = (total_blocks + blocks_per_sheet - 1) // blocks_per_sheet
@@ -178,7 +205,12 @@ def create_excel_summary_single_sheet(df, filename="summary_layout_single_sheet.
     
     # Configuration
     block_width = 4  # columns per block (3 data + 1 spacing)
-    block_height = 7  # rows per block
+    # Calculate block height dynamically based on actual transcript count
+    if data_list:
+        num_transcripts = len(data_list[0]['transcript_data'])
+        block_height = calculate_block_height(num_transcripts)
+    else:
+        block_height = 11  # default for 7 transcripts
     
     # Create all blocks on single sheet
     for idx, data in enumerate(data_list):
